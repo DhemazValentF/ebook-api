@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SiswaController;
+
+use App\Http\Controllers\HeloController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,3 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('halo',function(){
     return ['me' => 'Dhemaz'];
 });
+
+route::resource('halcontroller',HeloController::class);
+
+route::resource('siswa',SiswaController::class);
