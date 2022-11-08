@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -32,16 +32,16 @@ class AuthController extends Controller
         return response($response, 201); 
     }
 
-    public function Login(Request $request)
+    public function login(Request $request)
     {
         $fields = $request->validate([
-            'name' => 'required|string',
             'email' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        $user = User::where('email', $fields['email']->first());
+        $user = User::where('email', $fields['email'])->first();
 
-        if (!user || !Hash::check($fields['password'], $user->password)) {
+        if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'unauthorized'
             ], 401);
